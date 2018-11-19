@@ -1,0 +1,11 @@
+version: '2'
+services:
+    glossary-postgresql:
+        image: postgres:10.4
+        # volumes:
+        #     - ~/volumes/jhipster/glossary/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=glossary
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

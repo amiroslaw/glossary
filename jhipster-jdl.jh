@@ -1,0 +1,33 @@
+entity GLUser {
+    //ID and auth will generated move this to jh user class
+}
+entity Dictionary {
+    title String required,
+    isPublic Boolena
+}
+entity Word {
+    headword String required maxlength(50),
+    pronuncation String maxlength(50),
+    audioURL String maxlength(50),
+}
+entity Example {
+	exampleText String required
+}
+entity Definition {
+	partOfSpeech String required maxlength(20),   
+    definitionText String required
+}
+
+relationship OneToMany {
+	GLUser{dictionaries} to Dictionary,
+    Word{example} to Example,
+	Word{definition} to Definition
+}   
+relationship ManyToMany {
+	Word{dictionaries} to Dictionary{word} 
+}
+
+//Unidirectional-add vals for both sites but do not add support in controller
+//relationship OneToOne {
+	//Unidirectional
+//}
