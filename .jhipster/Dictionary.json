@@ -1,0 +1,40 @@
+{
+    "name": "Dictionary",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "isPublic",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "gLUser",
+            "otherEntityName": "gLUser",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "word",
+            "otherEntityName": "word",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "dictionaries"
+        }
+    ],
+    "changelogDate": "20181119234433",
+    "entityTableName": "dictionary",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

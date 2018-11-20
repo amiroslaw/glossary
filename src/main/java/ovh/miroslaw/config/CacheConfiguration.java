@@ -38,6 +38,16 @@ public class CacheConfiguration {
             cm.createCache(ovh.miroslaw.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(ovh.miroslaw.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(ovh.miroslaw.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.GLUser.class.getName(), jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.GLUser.class.getName() + ".dictionaries", jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.Dictionary.class.getName(), jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.Dictionary.class.getName() + ".words", jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.Word.class.getName(), jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.Word.class.getName() + ".examples", jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.Word.class.getName() + ".definitions", jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.Word.class.getName() + ".dictionaries", jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.Example.class.getName(), jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.Definition.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

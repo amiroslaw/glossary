@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dictionary">
+            <h2><span>Dictionary</span> {{dictionary.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Title</span></dt>
+                <dd>
+                    <span>{{dictionary.title}}</span>
+                </dd>
+                <dt><span>Is Public</span></dt>
+                <dd>
+                    <span>{{dictionary.isPublic}}</span>
+                </dd>
+                <dt><span>G L User</span></dt>
+                <dd>
+                    <div *ngIf="dictionary.gLUser">
+                        <a [routerLink]="['/gl-user', dictionary.gLUser?.id, 'view']">{{dictionary.gLUser?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/dictionary', dictionary.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

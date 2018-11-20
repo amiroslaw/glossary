@@ -1,0 +1,21 @@
+{
+    "name": "GLUser",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "dictionaries",
+            "otherEntityName": "dictionary",
+            "otherEntityRelationshipName": "gLUser"
+        }
+    ],
+    "changelogDate": "20181119234432",
+    "entityTableName": "gl_user",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

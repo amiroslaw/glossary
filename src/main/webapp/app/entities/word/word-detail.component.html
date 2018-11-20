@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="word">
+            <h2><span>Word</span> {{word.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Headword</span></dt>
+                <dd>
+                    <span>{{word.headword}}</span>
+                </dd>
+                <dt><span>Pronuncation</span></dt>
+                <dd>
+                    <span>{{word.pronuncation}}</span>
+                </dd>
+                <dt><span>Audio URL</span></dt>
+                <dd>
+                    <span>{{word.audioURL}}</span>
+                </dd>
+                <dt><span>Dictionaries</span></dt>
+                <dd>
+                    <span *ngFor="let dictionaries of word.dictionaries; let last = last">
+                        <a [routerLink]="['/dictionary', dictionaries?.id, 'view' ]">{{dictionaries.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/word', word.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

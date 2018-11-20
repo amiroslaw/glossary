@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="definition">
+            <h2><span>Definition</span> {{definition.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Part Of Speech</span></dt>
+                <dd>
+                    <span>{{definition.partOfSpeech}}</span>
+                </dd>
+                <dt><span>Definition Text</span></dt>
+                <dd>
+                    <span>{{definition.definitionText}}</span>
+                </dd>
+                <dt><span>Word</span></dt>
+                <dd>
+                    <div *ngIf="definition.word">
+                        <a [routerLink]="['/word', definition.word?.id, 'view']">{{definition.word?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/definition', definition.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

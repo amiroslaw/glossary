@@ -1,0 +1,61 @@
+{
+    "name": "Word",
+    "fields": [
+        {
+            "fieldName": "headword",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "pronuncation",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "audioURL",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "example",
+            "otherEntityName": "example",
+            "otherEntityRelationshipName": "word"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "definition",
+            "otherEntityName": "definition",
+            "otherEntityRelationshipName": "word"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "word",
+            "relationshipName": "dictionaries",
+            "otherEntityName": "dictionary",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20181119234434",
+    "entityTableName": "word",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

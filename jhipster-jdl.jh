@@ -3,7 +3,7 @@ entity GLUser {
 }
 entity Dictionary {
     title String required,
-    isPublic Boolena
+    isPublic Boolean
 }
 entity Word {
     headword String required maxlength(50),
