@@ -14,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -94,7 +93,7 @@ public class WordResourceIntTest {
     public static Word createEntity(EntityManager em) {
         Word word = new Word()
             .headword(DEFAULT_HEADWORD)
-            .pronuncation(DEFAULT_PRONUNCATION)
+            .pronunciation(DEFAULT_PRONUNCATION)
             .audioURL(DEFAULT_AUDIO_URL);
         return word;
     }
@@ -120,7 +119,7 @@ public class WordResourceIntTest {
         assertThat(wordList).hasSize(databaseSizeBeforeCreate + 1);
         Word testWord = wordList.get(wordList.size() - 1);
         assertThat(testWord.getHeadword()).isEqualTo(DEFAULT_HEADWORD);
-        assertThat(testWord.getPronuncation()).isEqualTo(DEFAULT_PRONUNCATION);
+        assertThat(testWord.getPronunciation()).isEqualTo(DEFAULT_PRONUNCATION);
         assertThat(testWord.getAudioURL()).isEqualTo(DEFAULT_AUDIO_URL);
     }
 
@@ -245,7 +244,7 @@ public class WordResourceIntTest {
         em.detach(updatedWord);
         updatedWord
             .headword(UPDATED_HEADWORD)
-            .pronuncation(UPDATED_PRONUNCATION)
+            .pronunciation(UPDATED_PRONUNCATION)
             .audioURL(UPDATED_AUDIO_URL);
 
         restWordMockMvc.perform(put("/api/words")
@@ -258,7 +257,7 @@ public class WordResourceIntTest {
         assertThat(wordList).hasSize(databaseSizeBeforeUpdate);
         Word testWord = wordList.get(wordList.size() - 1);
         assertThat(testWord.getHeadword()).isEqualTo(UPDATED_HEADWORD);
-        assertThat(testWord.getPronuncation()).isEqualTo(UPDATED_PRONUNCATION);
+        assertThat(testWord.getPronunciation()).isEqualTo(UPDATED_PRONUNCATION);
         assertThat(testWord.getAudioURL()).isEqualTo(UPDATED_AUDIO_URL);
     }
 

@@ -26,7 +26,7 @@
             <tr *ngFor="let word of words ;trackBy: trackId">
                 <td><a [routerLink]="['/word', word.id, 'view' ]">{{word.id}}</a></td>
                 <td>{{word.headword}}</td>
-                <td>{{word.pronuncation}}</td>
+                <td>{{word.pronunciation}}</td>
                 <td>{{word.audioURL}}</td>
                 <td>
                     <span *ngFor="let dictionaries of word.dictionaries; let last = last">

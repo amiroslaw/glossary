@@ -25,11 +25,11 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="pronuncation" type="varchar(50)">
+            <column name="pronunciation" type="varchar(50)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="audio_url" type="varchar(50)">
+            <column name="audio_url" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

@@ -1,6 +1,5 @@
 package ovh.miroslaw.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -33,11 +32,10 @@ public class Word implements Serializable {
     private String headword;
 
     @Size(max = 50)
-    @Column(name = "pronuncation", length = 50)
-    private String pronuncation;
+    @Column(name = "pronunciation", length = 50)
+    private String pronunciation;
 
-    @Size(max = 50)
-    @Column(name = "audio_url", length = 50)
+    @Column(name = "audio_url")
     private String audioURL;
 
     @OneToMany(mappedBy = "word")
@@ -77,17 +75,17 @@ public class Word implements Serializable {
         this.headword = headword;
     }
 
-    public String getPronuncation() {
-        return pronuncation;
+    public String getPronunciation() {
+        return pronunciation;
     }
 
-    public Word pronuncation(String pronuncation) {
-        this.pronuncation = pronuncation;
+    public Word pronunciation(String pronunciation) {
+        this.pronunciation = pronunciation;
         return this;
     }
 
-    public void setPronuncation(String pronuncation) {
-        this.pronuncation = pronuncation;
+    public void setPronunciation(String pronunciation) {
+        this.pronunciation = pronunciation;
     }
 
     public String getAudioURL() {
@@ -204,7 +202,7 @@ public class Word implements Serializable {
         return "Word{" +
             "id=" + getId() +
             ", headword='" + getHeadword() + "'" +
-            ", pronuncation='" + getPronuncation() + "'" +
+            ", pronunciation='" + getPronunciation() + "'" +
             ", audioURL='" + getAudioURL() + "'" +
             "}";
     }

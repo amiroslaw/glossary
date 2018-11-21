@@ -7,7 +7,7 @@ entity Dictionary {
 }
 entity Word {
     headword String required maxlength(50),
-    pronuncation String maxlength(50),
+    pronunciation String maxlength(50),
     audioURL String maxlength(50),
 }
 entity Example {

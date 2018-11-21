@@ -38,8 +38,7 @@ public class CacheConfiguration {
             cm.createCache(ovh.miroslaw.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(ovh.miroslaw.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(ovh.miroslaw.domain.User.class.getName() + ".authorities", jcacheConfiguration);
-            cm.createCache(ovh.miroslaw.domain.GLUser.class.getName(), jcacheConfiguration);
-            cm.createCache(ovh.miroslaw.domain.GLUser.class.getName() + ".dictionaries", jcacheConfiguration);
+            cm.createCache(ovh.miroslaw.domain.User.class.getName() + ".dictionaries", jcacheConfiguration);
             cm.createCache(ovh.miroslaw.domain.Dictionary.class.getName(), jcacheConfiguration);
             cm.createCache(ovh.miroslaw.domain.Dictionary.class.getName() + ".words", jcacheConfiguration);
             cm.createCache(ovh.miroslaw.domain.Word.class.getName(), jcacheConfiguration);

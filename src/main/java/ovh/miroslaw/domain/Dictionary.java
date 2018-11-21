@@ -37,7 +37,7 @@ public class Dictionary implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("dictionaries")
-    private GLUser gLUser;
+    private User user;
 
     @ManyToMany(mappedBy = "dictionaries")
     @JsonIgnore
@@ -79,17 +79,17 @@ public class Dictionary implements Serializable {
         this.isPublic = isPublic;
     }
 
-    public GLUser getGLUser() {
-        return gLUser;
+    public User user() {
+        return user;
     }
 
-    public Dictionary gLUser(GLUser gLUser) {
-        this.gLUser = gLUser;
+    public Dictionary user(User user) {
+        this.user = user;
         return this;
     }
 
-    public void setGLUser(GLUser gLUser) {
-        this.gLUser = gLUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<Word> getWords() {

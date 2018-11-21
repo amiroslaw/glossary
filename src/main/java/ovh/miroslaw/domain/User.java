@@ -95,6 +95,35 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
+    @OneToMany(mappedBy = "user")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Dictionary> dictionaries = new HashSet<>();
+
+    public Set<Dictionary> getDictionaries() {
+        return dictionaries;
+    }
+
+    public User dictionaries(Set<Dictionary> dictionaries) {
+        this.dictionaries = dictionaries;
+        return this;
+    }
+
+    public User addDictionaries(Dictionary dictionary) {
+        this.dictionaries.add(dictionary);
+        dictionary.setUser(this);
+        return this;
+    }
+
+    public User removeDictionaries(Dictionary dictionary) {
+        this.dictionaries.remove(dictionary);
+        dictionary.setUser(null);
+        return this;
+    }
+
+    public void setDictionaries(Set<Dictionary> dictionaries) {
+        this.dictionaries = dictionaries;
+    }
+
     public Long getId() {
         return id;
     }
