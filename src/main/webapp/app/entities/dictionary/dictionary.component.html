@@ -16,8 +16,8 @@
             <tr>
             <th><span>ID</span></th>
             <th><span>Title</span></th>
-            <th><span>Is Public</span></th>
-            <th><span>G L User</span></th>
+            <th><span>Is Private</span></th>
+            <th><span>User</span></th>
             <th></th>
             </tr>
             </thead>
@@ -25,10 +25,10 @@
             <tr *ngFor="let dictionary of dictionaries ;trackBy: trackId">
                 <td><a [routerLink]="['/dictionary', dictionary.id, 'view' ]">{{dictionary.id}}</a></td>
                 <td>{{dictionary.title}}</td>
-                <td>{{dictionary.isPublic}}</td>
+                <td>{{dictionary.isPrivate}}</td>
                 <td>
-                    <div *ngIf="dictionary.gLUser">
-                        <a [routerLink]="['../gl-user', dictionary.gLUser?.id, 'view' ]" >{{dictionary.gLUser?.id}}</a>
+                    <div *ngIf="dictionary.user">
+                        <a [routerLink]="['../gl-user', dictionary.user?.id, 'view' ]" >{{dictionary.user?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

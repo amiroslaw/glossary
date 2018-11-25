@@ -172,7 +172,7 @@ public class WordResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(word.getId().intValue())))
             .andExpect(jsonPath("$.[*].headword").value(hasItem(DEFAULT_HEADWORD.toString())))
-            .andExpect(jsonPath("$.[*].pronuncation").value(hasItem(DEFAULT_PRONUNCATION.toString())))
+            .andExpect(jsonPath("$.[*].pronunciation").value(hasItem(DEFAULT_PRONUNCATION.toString())))
             .andExpect(jsonPath("$.[*].audioURL").value(hasItem(DEFAULT_AUDIO_URL.toString())));
     }
     
@@ -219,7 +219,7 @@ public class WordResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(word.getId().intValue()))
             .andExpect(jsonPath("$.headword").value(DEFAULT_HEADWORD.toString()))
-            .andExpect(jsonPath("$.pronuncation").value(DEFAULT_PRONUNCATION.toString()))
+            .andExpect(jsonPath("$.pronunciation").value(DEFAULT_PRONUNCATION.toString()))
             .andExpect(jsonPath("$.audioURL").value(DEFAULT_AUDIO_URL.toString()));
     }
     @Test

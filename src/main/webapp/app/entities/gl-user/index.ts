@@ -1,4 +1,4 @@
-export * from './gl-user.service';
+export * from './user.service';
 export * from './gl-user-update.component';
 export * from './gl-user-delete-dialog.component';
 export * from './gl-user-detail.component';

@@ -5,7 +5,7 @@ import { IDictionary } from 'app/shared/model//dictionary.model';
 export interface IWord {
     id?: number;
     headword?: string;
-    pronuncation?: string;
+    pronunciation?: string;
     audioURL?: string;
     examples?: IExample[];
     definitions?: IDefinition[];
@@ -16,7 +16,7 @@ export class Word implements IWord {
     constructor(
         public id?: number,
         public headword?: string,
-        public pronuncation?: string,
+        public pronunciation?: string,
         public audioURL?: string,
         public examples?: IExample[],
         public definitions?: IDefinition[],

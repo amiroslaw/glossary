@@ -28,7 +28,7 @@ public class Word implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "headword", length = 50, nullable = false)
+    @Column(name = "headword", length = 50, nullable = false, unique = true)
     private String headword;
 
     @Size(max = 50)

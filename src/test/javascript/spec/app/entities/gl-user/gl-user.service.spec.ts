@@ -1,14 +1,14 @@
 /* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { GLUserService } from 'app/entities/gl-user/gl-user.service';
-import { GLUser } from 'app/shared/model/gl-user.model';
+import { UserService } from 'app/entities/gl-user/user.service';
+import { User } from 'app/shared/model/gl-user.model';
 import { SERVER_API_URL } from 'app/app.constants';
 
 describe('Service Tests', () => {
-    describe('GLUser Service', () => {
+    describe('User Service', () => {
         let injector: TestBed;
-        let service: GLUserService;
+        let service: UserService;
         let httpMock: HttpTestingController;
 
         beforeEach(() => {
@@ -16,7 +16,7 @@ describe('Service Tests', () => {
                 imports: [HttpClientTestingModule]
             });
             injector = getTestBed();
-            service = injector.get(GLUserService);
+            service = injector.get(UserService);
             httpMock = injector.get(HttpTestingController);
         });
 
@@ -30,8 +30,8 @@ describe('Service Tests', () => {
                 expect(req.request.url).toEqual(resourceUrl + '/' + 123);
             });
 
-            it('should create a GLUser', () => {
-                service.create(new GLUser(null)).subscribe(received => {
+            it('should create a User', () => {
+                service.create(new User(null)).subscribe(received => {
                     expect(received.body.id).toEqual(null);
                 });
 
@@ -39,8 +39,8 @@ describe('Service Tests', () => {
                 req.flush({ id: null });
             });
 
-            it('should update a GLUser', () => {
-                service.update(new GLUser(123)).subscribe(received => {
+            it('should update a User', () => {
+                service.update(new User(123)).subscribe(received => {
                     expect(received.body.id).toEqual(123);
                 });
 
@@ -48,7 +48,7 @@ describe('Service Tests', () => {
                 req.flush({ id: 123 });
             });
 
-            it('should return a GLUser', () => {
+            it('should return a User', () => {
                 service.find(123).subscribe(received => {
                     expect(received.body.id).toEqual(123);
                 });
@@ -57,16 +57,16 @@ describe('Service Tests', () => {
                 req.flush({ id: 123 });
             });
 
-            it('should return a list of GLUser', () => {
+            it('should return a list of User', () => {
                 service.query(null).subscribe(received => {
                     expect(received.body[0].id).toEqual(123);
                 });
 
                 const req = httpMock.expectOne({ method: 'GET' });
-                req.flush([new GLUser(123)]);
+                req.flush([new User(123)]);
             });
 
-            it('should delete a GLUser', () => {
+            it('should delete a User', () => {
                 service.delete(123).subscribe(received => {
                     expect(received.url).toContain('/' + 123);
                 });

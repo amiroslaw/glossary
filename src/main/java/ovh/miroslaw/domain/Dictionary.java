@@ -32,8 +32,8 @@ public class Dictionary implements Serializable {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "is_public")
-    private Boolean isPublic;
+    @Column(name = "is_private")
+    private Boolean isPrivate;
 
     @ManyToOne
     @JsonIgnoreProperties("dictionaries")
@@ -67,16 +67,16 @@ public class Dictionary implements Serializable {
     }
 
     public Boolean isIsPublic() {
-        return isPublic;
+        return isPrivate;
     }
 
     public Dictionary isPublic(Boolean isPublic) {
-        this.isPublic = isPublic;
+        this.isPrivate = isPublic;
         return this;
     }
 
-    public void setIsPublic(Boolean isPublic) {
-        this.isPublic = isPublic;
+    public void setIsPrivate(Boolean isPrivate) {
+        this.isPrivate = isPrivate;
     }
 
     public User user() {
@@ -143,7 +143,7 @@ public class Dictionary implements Serializable {
         return "Dictionary{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
-            ", isPublic='" + isIsPublic() + "'" +
+            ", isPrivate='" + isIsPublic() + "'" +
             "}";
     }
 }

@@ -1,12 +1,15 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
-
+.card-body .btn {
+    margin: 3%;
+}
 .hipster {
-    display: inline-block;
-    width: 347px;
-    height: 497px;
-    background: url('../../content/images/hipster.png') no-repeat center top;
+    display: block;
+    margin: 10% auto;
+    mian-width: 347px;
+    min-height: 333px;
+    background: url('../../content/images/hub400.png') no-repeat center top;
     background-size: contain;
 }
 
@@ -17,7 +20,7 @@ Main page styles
     only screen and (min-resolution: 192dpi),
     only screen and (min-resolution: 2dppx) {
     .hipster {
-        background: url('../../content/images/hipster2x.png') no-repeat center top;
+        background: url('../../content/images/hub700.png') no-repeat center top;
         background-size: contain;
     }
 }

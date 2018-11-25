@@ -9,14 +9,14 @@
                 <dd>
                     <span>{{dictionary.title}}</span>
                 </dd>
-                <dt><span>Is Public</span></dt>
+                <dt><span>Private</span></dt>
                 <dd>
-                    <span>{{dictionary.isPublic}}</span>
+                    <span>{{dictionary.isPrivate}}</span>
                 </dd>
-                <dt><span>G L User</span></dt>
+                <dt><span>User</span></dt>
                 <dd>
-                    <div *ngIf="dictionary.gLUser">
-                        <a [routerLink]="['/gl-user', dictionary.gLUser?.id, 'view']">{{dictionary.gLUser?.id}}</a>
+                    <div *ngIf="dictionary.user">
+                        <a [routerLink]="['/gl-user', dictionary.user?.id, 'view']">{{dictionary.user?.id}}</a>
                     </div>
                 </dd>
             </dl>

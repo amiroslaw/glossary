@@ -14,7 +14,7 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity GLUser.
+        Added the entity User.
     -->
     <changeSet id="20181119234432-1" author="jhipster">
         <createTable tableName="gl_user">

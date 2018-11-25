@@ -21,16 +21,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_isPublic">Is Public</label>
-                    <input type="checkbox" class="form-control" name="isPublic" id="field_isPublic"
-                        [(ngModel)]="dictionary.isPublic" />
+                    <label class="form-control-label" for="field_isPrivate">Is Private</label>
+                    <input type="checkbox" class="form-control" name="isPrivate" id="field_isPrivate"
+                        [(ngModel)]="dictionary.isPrivate" />
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_gLUser">G L User</label>
-                    <select class="form-control" id="field_gLUser" name="gLUser" [(ngModel)]="dictionary.gLUser" >
+                    <select class="form-control" id="field_gLUser" name="gLUser" [(ngModel)]="dictionary.user" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="gLUserOption.id === dictionary.gLUser?.id ? dictionary.gLUser : gLUserOption" *ngFor="let gLUserOption of glusers; trackBy: trackGLUserById">{{gLUserOption.id}}</option>
+                        <option [ngValue]="gLUserOption.id === dictionary.user?.id ? dictionary.user : gLUserOption" *ngFor="let gLUserOption of glusers; trackBy: trackGLUserById">{{gLUserOption.id}}</option>
                     </select>
                 </div>
             </div>

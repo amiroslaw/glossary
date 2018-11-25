@@ -3,13 +3,13 @@
         <span class="hipster img-fluid rounded"></span>
     </div>
     <div class="col-md-9">
-        <h1 class="display-4">Welcome, Java Hipster!</h1>
-        <p class="lead">This is your homepage</p>
+        <h1 class="display-4">Welcome, Glossary.</h1>
+        <p class="lead">This is your hub for vocabulary. Collect words from different sources to one place.</p>
 
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span id="home-logged-message" *ngIf="account"
-                   > You are logged in as user "{{account.login}}". </span>
+                > You are logged in as user "{{account.login}}". </span>
             </div>
 
             <div class="alert alert-warning" *ngSwitchCase="false">
@@ -21,21 +21,61 @@
                 <a class="alert-link" routerLink="register">Register a new account</a>
             </div>
         </div>
-
-        <p>
-            If you have any question on JHipster:
-        </p>
-
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener">follow @java_hipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener">GitHub</a>!
-        </p>
+        <div class="card-deck">
+            <div class="card">
+                <img class="card-img-top" src="../../content/images/import/spreadsheet.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Import from file</h4>
+                    <p class="card-text">
+                        You can import your list of the vocabulary from plain .txt file or export your spreadsheet into
+                        CSV.
+                    </p>
+                    <div class="text-center">
+                        <a href="#!" class="btn btn-primary">.CSV</a>
+                        <a href="#!" class="btn btn-primary">.TXT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="../../content/images/import/marker.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Highlight words from text</h4>
+                    <p class="card-text">
+                        Import text file or paste copied text. You can save highlighted words into your dictionary.
+                    </p>
+                    <div class="text-center">
+                        <a class="btn btn-primary" routerLink="import/highlight">Paste</a>
+                        <a href="#!" class="btn btn-primary">.TXT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="../../content/images/import/kindle2.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Import from Kindle</h4>
+                    <p class="card-text">
+                        You can import your words from Vocabulary Builder. Look up how to do it. <a
+                        routerLink="help/kindle">
+                        <fa-icon [icon]="'external-link-alt'"></fa-icon>
+                    </a>
+                    </p>
+                    <div class="text-center">
+                        <a href="#!" class="btn btn-primary">vocab.db</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="../../content/images/import/movie.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">Import from subtitle</h4>
+                    <p class="card-text">
+                        You can import subtitle from .srt file. The sentences will be shuffled.
+                    </p>
+                    <div class="text-center">
+                        <a href="#!" class="btn btn-primary">.SRT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

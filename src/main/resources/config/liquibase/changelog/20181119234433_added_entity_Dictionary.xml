@@ -25,7 +25,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="is_public" type="boolean">
+            <column name="is_private" type="boolean">
                 <constraints nullable="true" />
             </column>
 

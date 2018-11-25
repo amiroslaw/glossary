@@ -162,7 +162,7 @@ public class DictionaryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(dictionary.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
-            .andExpect(jsonPath("$.[*].isPublic").value(hasItem(DEFAULT_IS_PUBLIC.booleanValue())));
+            .andExpect(jsonPath("$.[*].isPrivate").value(hasItem(DEFAULT_IS_PUBLIC.booleanValue())));
     }
     
 
@@ -178,7 +178,7 @@ public class DictionaryResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(dictionary.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
-            .andExpect(jsonPath("$.isPublic").value(DEFAULT_IS_PUBLIC.booleanValue()));
+            .andExpect(jsonPath("$.isPrivate").value(DEFAULT_IS_PUBLIC.booleanValue()));
     }
     @Test
     @Transactional

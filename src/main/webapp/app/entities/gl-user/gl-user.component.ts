@@ -3,30 +3,31 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
-import { IGLUser } from 'app/shared/model/gl-user.model';
+import { IUser } from 'app/shared/model/gl-user.model';
 import { Principal } from 'app/core';
-import { GLUserService } from './gl-user.service';
+import { UserService } from './user.service';
 
 @Component({
     selector: 'jhi-gl-user',
     templateUrl: './gl-user.component.html'
 })
 export class GLUserComponent implements OnInit, OnDestroy {
-    gLUsers: IGLUser[];
+    users: IUser[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
     constructor(
-        private gLUserService: GLUserService,
+        private userService: UserService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {}
 
     loadAll() {
-        this.gLUserService.query().subscribe(
-            (res: HttpResponse<IGLUser[]>) => {
-                this.gLUsers = res.body;
+        this.userService.query().subscribe(
+            (res: HttpResponse<IUser[]>) => {
+                this.users = res.body;
+                console.log('logc' + res.body[0]);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -38,13 +39,14 @@ export class GLUserComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInGLUsers();
+        console.log('users' + this.users[0]);
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: IGLUser) {
+    trackId(index: number, item: IUser) {
         return item.id;
     }
 

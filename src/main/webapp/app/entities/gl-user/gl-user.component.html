@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span>GL Users</span>
+        <span>Users</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-gl-user" [routerLink]="['/gl-user/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
@@ -10,33 +10,35 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="gLUsers">
+    <div class="table-responsive" *ngIf="users">
         <table class="table table-striped">
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th></th>
+                <th>Login</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let gLUser of gLUsers ;trackBy: trackId">
-                <td><a [routerLink]="['/gl-user', gLUser.id, 'view' ]">{{gLUser.id}}</a></td>
+            <tr *ngFor="let user of users ;trackBy: trackId">
+                <td><a [routerLink]="['/gl-user', user.id, 'view' ]">{{user.id}}</a></td>
+                <td>{{user.login}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/gl-user', gLUser.id, 'view' ]"
+                                [routerLink]="['/gl-user', user.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/gl-user', gLUser.id, 'edit']"
+                                [routerLink]="['/gl-user', user.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'gl-user/'+ gLUser.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'gl-user/'+ user.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
@@ -45,6 +47,7 @@
                         </button>
                     </div>
                 </td>
+
             </tr>
             </tbody>
         </table>

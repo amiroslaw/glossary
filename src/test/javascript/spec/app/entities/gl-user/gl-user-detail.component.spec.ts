@@ -5,13 +5,13 @@ import { of } from 'rxjs';
 
 import { GlossaryTestModule } from '../../../test.module';
 import { GLUserDetailComponent } from 'app/entities/gl-user/gl-user-detail.component';
-import { GLUser } from 'app/shared/model/gl-user.model';
+import { User } from 'app/shared/model/gl-user.model';
 
 describe('Component Tests', () => {
-    describe('GLUser Management Detail Component', () => {
+    describe('User Management Detail Component', () => {
         let comp: GLUserDetailComponent;
         let fixture: ComponentFixture<GLUserDetailComponent>;
-        const route = ({ data: of({ gLUser: new GLUser(123) }) } as any) as ActivatedRoute;
+        const route = ({ data: of({ gLUser: new User(123) }) } as any) as ActivatedRoute;
 
         beforeEach(() => {
             TestBed.configureTestingModule({

@@ -1,10 +1,10 @@
 import { IDictionary } from 'app/shared/model//dictionary.model';
 
-export interface IGLUser {
+export interface IUser {
     id?: number;
     dictionaries?: IDictionary[];
 }
 
-export class GLUser implements IGLUser {
+export class User implements IUser {
     constructor(public id?: number, public dictionaries?: IDictionary[]) {}
 }

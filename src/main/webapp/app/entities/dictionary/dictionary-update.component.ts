@@ -6,8 +6,8 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IDictionary } from 'app/shared/model/dictionary.model';
 import { DictionaryService } from './dictionary.service';
-import { IGLUser } from 'app/shared/model/gl-user.model';
-import { GLUserService } from 'app/entities/gl-user';
+import { IUser } from 'app/shared/model/gl-user.model';
+import { UserService } from 'app/entities/gl-user';
 import { IWord } from 'app/shared/model/word.model';
 import { WordService } from 'app/entities/word';
 
@@ -19,14 +19,14 @@ export class DictionaryUpdateComponent implements OnInit {
     private _dictionary: IDictionary;
     isSaving: boolean;
 
-    glusers: IGLUser[];
+    glusers: IUser[];
 
     words: IWord[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private dictionaryService: DictionaryService,
-        private gLUserService: GLUserService,
+        private gLUserService: UserService,
         private wordService: WordService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -37,7 +37,7 @@ export class DictionaryUpdateComponent implements OnInit {
             this.dictionary = dictionary;
         });
         this.gLUserService.query().subscribe(
-            (res: HttpResponse<IGLUser[]>) => {
+            (res: HttpResponse<IUser[]>) => {
                 this.glusers = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
@@ -80,7 +80,7 @@ export class DictionaryUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackGLUserById(index: number, item: IGLUser) {
+    trackGLUserById(index: number, item: IUser) {
         return item.id;
     }
 
