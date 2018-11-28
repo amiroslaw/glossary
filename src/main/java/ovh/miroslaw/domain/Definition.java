@@ -1,6 +1,8 @@
 package ovh.miroslaw.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -32,10 +34,12 @@ public class Definition implements Serializable {
 
     @NotNull
     @Column(name = "definition_text", nullable = false)
+//    @JsonProperty("text")
     private String definitionText;
 
     @ManyToOne
     @JsonIgnoreProperties("definitions")
+    @JsonIgnore
     private Word word;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -68,7 +72,7 @@ public class Definition implements Serializable {
         this.definitionText = definitionText;
         return this;
     }
-
+    @JsonSetter("text")
     public void setDefinitionText(String definitionText) {
         this.definitionText = definitionText;
     }

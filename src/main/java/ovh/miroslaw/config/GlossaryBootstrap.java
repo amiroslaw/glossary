@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ovh.miroslaw.domain.*;
 import ovh.miroslaw.repository.*;
+import ovh.miroslaw.service.DictionaryProviderService;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,8 +23,10 @@ public class GlossaryBootstrap implements CommandLineRunner {
     private final DefinitionRepository definitionRepository;
     private final ExampleRepository exampleRepository;
 
-    public GlossaryBootstrap(PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository,
-    UserRepository userRepository, WordRepository wordRepository, DictionaryRepository dictionaryRepository, DefinitionRepository definitionRepository, ExampleRepository exampleRepository){
+    private final DictionaryProviderService dictionaryService;
+
+    public GlossaryBootstrap(DictionaryProviderService dictionaryService, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository,
+                             UserRepository userRepository, WordRepository wordRepository, DictionaryRepository dictionaryRepository, DefinitionRepository definitionRepository, ExampleRepository exampleRepository){
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.userRepository = userRepository;
@@ -31,6 +34,8 @@ public class GlossaryBootstrap implements CommandLineRunner {
         this.dictionaryRepository = dictionaryRepository;
         this.definitionRepository = definitionRepository;
         this.exampleRepository = exampleRepository;
+
+        this.dictionaryService = dictionaryService;
         }
     @Override
     public void run(String... args) throws Exception {
@@ -40,6 +45,11 @@ public class GlossaryBootstrap implements CommandLineRunner {
         createExample(wordCat, "cat is an animal");
         createDefinition(wordCat, "noun", "definitionText");
         createDictionary(normalUser, "title", true, wordCat);
+        test();
+    }
+
+    private void test() {
+        dictionaryService.saveWord("cut");
     }
 
     private void createDictionary(User user, String title, boolean isPublic, Word... words) {
