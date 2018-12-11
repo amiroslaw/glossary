@@ -14,7 +14,6 @@ import { ProfileService } from '../profiles/profile.service';
 export class NavbarComponent implements OnInit {
     inProduction: boolean;
     isNavbarCollapsed: boolean;
-    languages: any[];
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;

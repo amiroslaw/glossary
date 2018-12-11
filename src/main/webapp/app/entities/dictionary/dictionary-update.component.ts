@@ -19,7 +19,7 @@ export class DictionaryUpdateComponent implements OnInit {
     private _dictionary: IDictionary;
     isSaving: boolean;
 
-    glusers: IUser[];
+    users: IUser[];
 
     words: IWord[];
 
@@ -38,7 +38,7 @@ export class DictionaryUpdateComponent implements OnInit {
         });
         this.gLUserService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
-                this.glusers = res.body;
+                this.users = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

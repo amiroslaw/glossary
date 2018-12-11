@@ -42,7 +42,8 @@ import {
     faHome,
     faBeer,
     faExternalLinkAlt,
-    faAngry
+    faAngry,
+    faQuestionCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 // Adds the SVG icon to the library so you can use it in your page
@@ -83,5 +84,7 @@ library.add(faAsterisk);
 library.add(faBeer);
 library.add(faExternalLinkAlt);
 library.add(faAngry);
+
+library.add(faQuestionCircle);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

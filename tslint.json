@@ -6,6 +6,7 @@
         "tslint-config-prettier"
     ],
     "rules": {
+        "defaultSeverity": "warning",
         "class-name": true,
         "comment-format": [
             true,

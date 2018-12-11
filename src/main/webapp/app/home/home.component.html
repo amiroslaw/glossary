@@ -21,19 +21,19 @@
                 <a class="alert-link" routerLink="register">Register a new account</a>
             </div>
         </div>
-        <div class="card-deck">
-            <div class="card">
+        <div class="card-deck ">
+            <div class="card border-info">
                 <img class="card-img-top" src="../../content/images/import/spreadsheet.png" alt="Card image cap">
                 <div class="card-body">
                     <h4 class="card-title">Import from file</h4>
                     <p class="card-text">
                         You can import your list of the vocabulary from plain .txt file or export your spreadsheet into
                         CSV.
+                        <a routerLink="help/import-csv">
+                            <fa-icon [icon]="'question-circle'"></fa-icon>
+                        </a>
                     </p>
-                    <div class="text-center">
-                        <a href="#!" class="btn btn-primary">.CSV</a>
-                        <a href="#!" class="btn btn-primary">.TXT</a>
-                    </div>
+                    <a class="btn btn-primary btn-block" routerLink="import/csv">Import</a>
                 </div>
             </div>
             <div class="card">
@@ -44,8 +44,8 @@
                         Import text file or paste copied text. You can save highlighted words into your dictionary.
                     </p>
                     <div class="text-center">
-                        <a class="btn btn-primary" routerLink="import/highlight">Paste</a>
-                        <a href="#!" class="btn btn-primary">.TXT</a>
+                        <a class="btn btn-primary btn-block" routerLink="word-chooser/highlight">Paste</a>
+                        <a href="#!" class="btn btn-primary btn-block" routerLink="import/txt">Import .txt</a>
                     </div>
                 </div>
             </div>
@@ -54,26 +54,22 @@
                 <div class="card-body">
                     <h4 class="card-title">Import from Kindle</h4>
                     <p class="card-text">
-                        You can import your words from Vocabulary Builder. Look up how to do it. <a
-                        routerLink="help/kindle">
-                        <fa-icon [icon]="'external-link-alt'"></fa-icon>
+                        You can import your words from Vocabulary Builder. Look up how to do it.
+                        <a routerLink="help/import-kindle">
+                            <fa-icon [icon]="'question-circle'"></fa-icon>
                     </a>
                     </p>
-                    <div class="text-center">
-                        <a href="#!" class="btn btn-primary">vocab.db</a>
-                    </div>
+                    <a class="btn btn-primary btn-block" routerLink="import/kindle">Import vocab.db</a>
                 </div>
             </div>
-            <div class="card">
+            <div class="card bg-secondary   ">
                 <img class="card-img-top" src="../../content/images/import/movie.png" alt="Card image cap">
                 <div class="card-body">
                     <h4 class="card-title">Import from subtitle</h4>
                     <p class="card-text">
                         You can import subtitle from .srt file. The sentences will be shuffled.
                     </p>
-                    <div class="text-center">
-                        <a href="#!" class="btn btn-primary">.SRT</a>
-                    </div>
+                    <a class="btn btn-primary btn-block" routerLink="word-chooser/subtitle">Import subtitle</a>
                 </div>
             </div>
         </div>

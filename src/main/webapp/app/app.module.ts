@@ -18,6 +18,8 @@ import { GlossaryAccountModule } from './account/account.module';
 import { GlossaryEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { WordImportComponent } from './import/word-import/word-import.component';
+import { WordChooserComponent } from './import/word-chooser/word-chooser.component';
 
 @NgModule({
     imports: [
@@ -31,7 +33,15 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         GlossaryEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+    declarations: [
+        JhiMainComponent,
+        NavbarComponent,
+        ErrorComponent,
+        PageRibbonComponent,
+        FooterComponent,
+        WordImportComponent,
+        WordChooserComponent
+    ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

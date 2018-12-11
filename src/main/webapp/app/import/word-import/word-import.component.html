@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <h2 id="jhi-word-heading">Create or select a Dictionary</h2>
+        <p>dic object: {{selectedDictionary?.id}}</p>
+        <p>priv: {{ dictionary?.title }}</p>
+
+        <form name="uploadForm" role="form" novalidate (ngSubmit)="onUpload()" #form="ngForm">
+            <jhi-alert-error></jhi-alert-error>
+            <div class="form-group">
+                <label class="form-control-label" for="field_title">Title</label>
+                <input type="text" class="form-control" name="title" id="field_title" #newTitle="ngModel"
+                       [(ngModel)]="dictionary.title" required/>
+                <div [hidden]="!(form.controls.title?.dirty && form.controls.title?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!form.controls.title?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="field_isPrivate">Is Private</label>
+                <input type="checkbox" class="form-control" name="isPrivate" id="field_isPrivate"
+                       [(ngModel)]="dictionary.isPrivate"/>
+            </div>
+            <div class="text-center">
+                <label>
+                    <input name="File"
+                           type="file"
+                           accept=".csv, text/plain"
+                           required
+                           (change)="onFileImport($event.target.files)">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="field_dictionary">Dictionary</label>
+                <select class="form-control" id="field_dictionary" name="dictionary" [(ngModel)]="selectedDictionary"
+                        [disabled]="!(dictionary.title === undefined || (form.controls.title?.dirty && dictionary.title ===''))">
+                    <option [ngValue]="dictionary"
+                            *ngFor="let dictionary of dictionaries">{{dictionary.title}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" id="save-entity" [disabled]="!hasFile"
+                        class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save words</span>
+                </button>
+                <!--TODO info about state -->
+                <!--<p *ngIf="!(newTitle?.touched || (newTitle?.dirty && newTitle ===''))">update negative </p>-->
+                <!--<p *ngIf="(newTitle === undefined || (newTitle?.dirty && newTitle ===''))">update2 </p>-->
+            </div>
+        </form>
+    </div>
+</div>
