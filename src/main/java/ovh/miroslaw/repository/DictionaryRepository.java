@@ -4,12 +4,14 @@ import ovh.miroslaw.domain.Dictionary;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 /**
  * Spring Data  repository for the Dictionary entity.
  */
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 @Repository
 public interface DictionaryRepository extends JpaRepository<Dictionary, Long> {
-
+    List<Dictionary> findAllByUserId(Long userID);
 }

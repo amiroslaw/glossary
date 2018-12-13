@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { GlossarySharedModule } from 'app/shared';
 import { HOME_ROUTE, HomeComponent } from './';
-import { IMPORT_ROUTE } from '../import/import.route';
+import { IMPORT_ROUTE } from '../layouts/import/import.route';
 
 @NgModule({
     imports: [GlossarySharedModule, RouterModule.forChild([HOME_ROUTE, ...IMPORT_ROUTE])],

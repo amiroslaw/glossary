@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
-import { WordChooserComponent } from './word-chooser/word-chooser.component';
-import { WordImportComponent } from './word-import/word-import.component';
+import { WordChooserComponent } from 'app/layouts';
+import { WordImportComponent } from 'app/layouts';
 import { UserRouteAccessService } from 'app/core';
 
 export const IMPORT_ROUTE: Routes = [

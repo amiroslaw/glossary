@@ -18,12 +18,11 @@ export class WordImportComponent implements OnInit {
     dictionary: IDictionary = new Dictionary();
     selectedDictionary: IDictionary;
     hasFile: boolean;
-    fileToUpload: File = null;
-    constructor(private dictionaryService: DictionaryService, private route: ActivatedRoute, private jhiAlertService: JhiAlertService) {
-        this.importType = this.route.snapshot.paramMap.get('import-type');
-    }
+    uploadedFile: File = null;
+    constructor(private dictionaryService: DictionaryService, private route: ActivatedRoute, private jhiAlertService: JhiAlertService) {}
 
     ngOnInit() {
+        this.importType = this.route.snapshot.paramMap.get('import-type');
         this.loadDictionaries();
     }
 
@@ -45,16 +44,19 @@ export class WordImportComponent implements OnInit {
         console.log(file.name);
         // TODO detect file type
         if (true) {
-            this.fileToUpload = files.item(0);
+            this.uploadedFile = files.item(0);
             this.hasFile = true;
         }
     }
     onUpload() {
-        if (this.dictionary.title === undefined) {
-            this.subscribeToSaveResponse(this.dictionaryService.update(this.dictionary));
-        } else {
-            this.subscribeToSaveResponse(this.dictionaryService.create(this.dictionary));
-        }
+        this.dictionaryService
+            .postFile(this.uploadedFile)
+            .subscribe(() => console.log('upload file'), (res: HttpErrorResponse) => this.onError(res.message));
+        // if (this.dictionary.title) {
+        //     this.subscribeToSaveResponse(this.dictionaryService.update(this.dictionary));
+        // } else {
+        //     this.subscribeToSaveResponse(this.dictionaryService.create(this.dictionary));
+        // }
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IDictionary>>) {

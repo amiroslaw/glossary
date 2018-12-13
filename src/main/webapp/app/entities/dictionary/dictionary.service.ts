@@ -35,4 +35,10 @@ export class DictionaryService {
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+    postFile(fileToUpload: File): Observable<HttpResponse<Object>> {
+        const formData: FormData = new FormData();
+        // name: 'file ' should be the same like @RequestParam
+        formData.append('file', fileToUpload, fileToUpload.name);
+        return this.http.post(`${this.resourceUrl}/file`, formData, { observe: 'response' });
+    }
 }
