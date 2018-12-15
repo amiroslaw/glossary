@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <h2 id="jhi-word-heading">Create or select a Dictionary</h2>
+        <h2 id="jhi-word-heading">Create or select a dictionary</h2>
         <p>dic object: {{selectedDictionary?.id}}</p>
         <p>priv: {{ dictionary?.title }}</p>
 
@@ -9,25 +9,25 @@
             <div class="form-group">
                 <label class="form-control-label" for="field_title">Title</label>
                 <input type="text" class="form-control" name="title" id="field_title" #newTitle="ngModel"
-                       [(ngModel)]="dictionary.title" required/>
-                <div [hidden]="!(form.controls.title?.dirty && form.controls.title?.invalid)">
-                    <small class="form-text text-danger"
-                           [hidden]="!form.controls.title?.errors?.required">
-                        This field is required.
-                    </small>
-                </div>
+                       [(ngModel)]="dictionary.title"/>
+
             </div>
             <div class="form-group">
-                <label class="form-control-label" for="field_isPrivate">Is Private</label>
+                <label class="form-control-label"  for="field_isPrivate" >Is Private</label>
                 <input type="checkbox" class="form-control" name="isPrivate" id="field_isPrivate"
-                       [(ngModel)]="dictionary.isPrivate"/>
+                        [(ngModel)]="dictionary.isPrivate"/>
             </div>
+            <!--ngbButton ngbButtonLabel-->
+
             <div class="text-center">
-                <label>
+                <label class="btn btn-info" >
+                    browse {{uploadedFile?.name}}
                     <input name="File"
                            type="file"
+
                            accept=".csv, text/plain"
                            required
+                           hidden
                            (change)="onFileImport($event.target.files)">
                 </label>
             </div>

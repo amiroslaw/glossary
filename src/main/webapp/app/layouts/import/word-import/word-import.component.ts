@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DictionaryService } from 'app/entities/dictionary';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Dictionary, IDictionary } from 'app/shared/model/dictionary.model';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { JhiAlertService } from 'ng-jhipster';
-import { Observable } from 'rxjs';
-import 'rxjs-compat/add/operator/take';
+import { Observable, of } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
     selector: 'jhi-word-import',
@@ -13,57 +13,69 @@ import 'rxjs-compat/add/operator/take';
     styles: []
 })
 export class WordImportComponent implements OnInit {
-    importType: string;
+    readonly importType: string;
     dictionaries: IDictionary[];
     dictionary: IDictionary = new Dictionary();
     selectedDictionary: IDictionary;
     hasFile: boolean;
-    uploadedFile: File = null;
-    constructor(private dictionaryService: DictionaryService, private route: ActivatedRoute, private jhiAlertService: JhiAlertService) {}
+    uploadedFile: File;
+
+    constructor(
+        private dictionaryService: DictionaryService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private jhiAlertService: JhiAlertService
+    ) {
+        this.importType = this.route.snapshot.paramMap.get('import-type');
+    }
 
     ngOnInit() {
-        this.importType = this.route.snapshot.paramMap.get('import-type');
         this.loadDictionaries();
+        console.log(this.importType);
     }
-
-    // loadDictionaries() {
-    //     return this.dictionaryService.query().pipe(map((dictionary: HttpResponse<Dictionary[]>) => dictionary.body));
-    // }
 
     loadDictionaries() {
-        this.dictionaryService.query().subscribe(
-            (res: HttpResponse<IDictionary[]>) => {
-                this.dictionaries = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message),
-            () => (this.selectedDictionary = this.dictionaries[0])
-        );
-    }
-    onFileImport(files: FileList) {
-        const file = files.item(0);
-        console.log(file.name);
-        // TODO detect file type
-        if (true) {
-            this.uploadedFile = files.item(0);
-            this.hasFile = true;
-        }
-    }
-    onUpload() {
         this.dictionaryService
-            .postFile(this.uploadedFile)
-            .subscribe(() => console.log('upload file'), (res: HttpErrorResponse) => this.onError(res.message));
-        // if (this.dictionary.title) {
-        //     this.subscribeToSaveResponse(this.dictionaryService.update(this.dictionary));
-        // } else {
-        //     this.subscribeToSaveResponse(this.dictionaryService.create(this.dictionary));
-        // }
+            .query()
+            .subscribe(
+                (res: HttpResponse<IDictionary[]>) => (this.dictionaries = res.body),
+                (res: HttpErrorResponse) => this.onError(res.message),
+                () => (this.selectedDictionary = this.dictionaries[0])
+            );
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IDictionary>>) {
-        result.subscribe((res: HttpResponse<IDictionary>) => console.log('updated'), (res: HttpErrorResponse) => this.onError(res.message));
+    onFileImport(files: FileList) {
+        this.uploadedFile = files.item(0);
+        this.hasFile = true;
+    }
+
+    onUpload() {
+        if (this.dictionary.title) {
+            this.dictionaryService
+                .create(this.dictionary)
+                .pipe(
+                    map((res: HttpResponse<IDictionary>) => res.body.id),
+                    switchMap(id => (id ? this.dictionaryService.uploadFile(this.uploadedFile, id, this.importType) : of(null)))
+                )
+                .subscribe(
+                    (res: HttpResponse<IDictionary>) => this.goToDictionary(res.body.id),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else {
+            this.dictionaryService
+                .uploadFile(this.uploadedFile, this.selectedDictionary.id, this.importType)
+                .subscribe(
+                    (res: HttpResponse<IDictionary>) => this.goToDictionary(res.body.id),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    private goToDictionary(id: number) {
+        this.router.navigate(['/dictionary', id, 'view']);
     }
 }

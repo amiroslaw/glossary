@@ -51,7 +51,7 @@ export class JhiAlertErrorComponent implements OnDestroy {
                             if (['Min', 'Max', 'DecimalMin', 'DecimalMax'].includes(fieldError.message)) {
                                 fieldError.message = 'Size';
                             }
-                            // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
+                            // convertToFile 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
                             const convertedField = fieldError.field.replace(/\[\d*\]/g, '[]');
                             const fieldName = convertedField.charAt(0).toUpperCase() + convertedField.slice(1);
                             this.addErrorAlert('Error on field "' + fieldName + '"', 'error.' + fieldError.message, { fieldName });

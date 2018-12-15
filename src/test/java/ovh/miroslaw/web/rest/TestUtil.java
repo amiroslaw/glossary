@@ -31,7 +31,7 @@ public class TestUtil {
      * Convert an object to JSON byte array.
      *
      * @param object
-     *            the object to convert
+     *            the object to convertToFile
      * @return the JSON byte array
      * @throws IOException
      */

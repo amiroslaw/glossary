@@ -14,7 +14,7 @@ public class AuditEventConverter {
     /**
      * Convert a list of PersistentAuditEvent to a list of AuditEvent
      *
-     * @param persistentAuditEvents the list to convert
+     * @param persistentAuditEvents the list to convertToFile
      * @return the converted list.
      */
     public List<AuditEvent> convertToAuditEvent(Iterable<PersistentAuditEvent> persistentAuditEvents) {
@@ -31,7 +31,7 @@ public class AuditEventConverter {
     /**
      * Convert a PersistentAuditEvent to an AuditEvent
      *
-     * @param persistentAuditEvent the event to convert
+     * @param persistentAuditEvent the event to convertToFile
      * @return the converted list.
      */
     public AuditEvent convertToAuditEvent(PersistentAuditEvent persistentAuditEvent) {
@@ -45,7 +45,7 @@ public class AuditEventConverter {
     /**
      * Internal conversion. This is needed to support the current SpringBoot actuator AuditEventRepository interface
      *
-     * @param data the data to convert
+     * @param data the data to convertToFile
      * @return a map of String, Object
      */
     public Map<String, Object> convertDataToObjects(Map<String, String> data) {
@@ -63,7 +63,7 @@ public class AuditEventConverter {
      * Internal conversion. This method will allow to save additional data.
      * By default, it will save the object as string
      *
-     * @param data the data to convert
+     * @param data the data to convertToFile
      * @return a map of String, String
      */
     public Map<String, String> convertDataToStrings(Map<String, Object> data) {

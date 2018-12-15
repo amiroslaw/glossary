@@ -39,12 +39,12 @@ public class GlossaryBootstrap implements CommandLineRunner {
         }
     @Override
     public void run(String... args) throws Exception {
-        User normalUser = createUser("Hulio", "pass", "hulio", "hulio@gmail.com", true, "ROLE_USER");
+        User normalUser = createUser("Hulio", "fass", "hulio", "hulio@gmail.com", true, "ROLE_USER");
         Word wordCat = getWord("cat", "kat", "http://api.wordnik.com/v4/audioFile.mp3/fa8ee00c79a4c3ca5427398962fba68afbf52b40a8e64ca29b5a91fce8c4be2f");
         wordRepository.save(wordCat);
         createExample(wordCat, "cat is an animal");
         createDefinition(wordCat, "noun", "definitionText");
-        createDictionary(normalUser, "title", true, wordCat);
+        createDictionary(normalUser, "dictionary title", true, wordCat);
         test();
     }
 

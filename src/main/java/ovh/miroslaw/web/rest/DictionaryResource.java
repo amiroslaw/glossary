@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
@@ -171,27 +170,27 @@ public class DictionaryResource {
      */
     @PostMapping("/dictionaries/file")
     @Timed
-    public ResponseEntity<Dictionary> postFile(@RequestParam(value = "file") MultipartFile multipartFile) throws URISyntaxException {
+    public ResponseEntity<Dictionary> uploadFile(@RequestParam(value = "file") MultipartFile multipartFile,  @RequestParam Long dictionaryId) throws URISyntaxException {
         log.debug("REST request to save Dictionary : {}");
-        if (multipartFile == null) {
+        if (multipartFile == null || multipartFile.isEmpty()) {
             throw new BadRequestAlertException("File is null", ENTITY_NAME, "");
         }
-        log.debug(convert(multipartFile).getName());
-        try (Stream<String> lines = Files.lines(Paths.get(convert(multipartFile).getPath()))) {
+        log.debug("param dic " + dictionaryId);
+        log.debug(convertToFile(multipartFile).getName());
+        try (Stream<String> lines = Files.lines(Paths.get(convertToFile(multipartFile).getPath()))) {
             lines.forEach(System.out::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-//        Dictionary result = dictionaryRepository.save(dictionary);
-        Dictionary result = new Dictionary();
-        result.setId(11L);
+        Optional<Dictionary> dictionary = dictionaryRepository.findById(dictionaryId);
+        Dictionary result = dictionary.orElseThrow(() -> new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull"));
         return ResponseEntity.created(new URI("/api/dictionaries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
-    public File convert(MultipartFile file) {
+    private File convertToFile(MultipartFile file) {
         File convFile = new File(file.getOriginalFilename());
         try (FileOutputStream fos = new FileOutputStream(convFile)) {
             fos.write(file.getBytes());

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
@@ -35,10 +35,13 @@ export class DictionaryService {
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
-    postFile(fileToUpload: File): Observable<HttpResponse<Object>> {
+    uploadFile(fileToUpload: File, dictionaryId: number, importType: string): Observable<HttpResponse<Object>> {
         const formData: FormData = new FormData();
+        const fileName: string = importType + '.' + fileToUpload.name.split('.').pop();
+
         // name: 'file ' should be the same like @RequestParam
-        formData.append('file', fileToUpload, fileToUpload.name);
+        formData.append('file', fileToUpload, fileName);
+        formData.append('dictionaryId', String(dictionaryId));
         return this.http.post(`${this.resourceUrl}/file`, formData, { observe: 'response' });
     }
 }
