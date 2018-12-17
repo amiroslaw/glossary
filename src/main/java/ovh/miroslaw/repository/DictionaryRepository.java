@@ -14,4 +14,5 @@ import java.util.List;
 @Repository
 public interface DictionaryRepository extends JpaRepository<Dictionary, Long> {
     List<Dictionary> findAllByUserId(Long userID);
+    List<Dictionary> findAllByIsPrivateFalse();
 }

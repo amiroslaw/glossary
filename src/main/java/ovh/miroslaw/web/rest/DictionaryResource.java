@@ -4,12 +4,10 @@ import com.codahale.metrics.annotation.Timed;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.multipart.MultipartFile;
 import ovh.miroslaw.domain.Dictionary;
-import ovh.miroslaw.domain.User;
-import ovh.miroslaw.repository.DictionaryRepository;
 import ovh.miroslaw.security.AuthoritiesConstants;
-import ovh.miroslaw.service.UserService;
+import ovh.miroslaw.service.DictionaryService;
+import ovh.miroslaw.service.util.FileUtil;
 import ovh.miroslaw.web.rest.errors.BadRequestAlertException;
-import ovh.miroslaw.web.rest.errors.InvalidPasswordException;
 import ovh.miroslaw.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -18,17 +16,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
  * REST controller for managing Dictionary.
@@ -41,13 +33,10 @@ public class DictionaryResource {
 
     private static final String ENTITY_NAME = "dictionary";
 
-    private final DictionaryRepository dictionaryRepository;
+    private final DictionaryService dictionaryService;
 
-    private final UserService userService;
-
-    public DictionaryResource(DictionaryRepository dictionaryRepository, UserService userService) {
-        this.dictionaryRepository = dictionaryRepository;
-        this.userService = userService;
+    public DictionaryResource(DictionaryService dictionaryService) {
+        this.dictionaryService = dictionaryService;
     }
 
     /**
@@ -64,7 +53,8 @@ public class DictionaryResource {
         if (dictionary.getId() != null) {
             throw new BadRequestAlertException("A new dictionary cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Dictionary result = dictionaryRepository.save(dictionary);
+        Dictionary result = dictionaryService.save(dictionary);
+
         return ResponseEntity.created(new URI("/api/dictionaries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -86,7 +76,7 @@ public class DictionaryResource {
         if (dictionary.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Dictionary result = dictionaryRepository.save(dictionary);
+        Dictionary result = dictionaryService.save(dictionary);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, dictionary.getId().toString()))
             .body(result);
@@ -101,9 +91,7 @@ public class DictionaryResource {
     @Timed
     public List<Dictionary> getUserDictionaries() {
         log.debug("REST request to get all user Dictionaries");
-//        Optional<Long> = userService.getUserWithAuthorities().ifPresent(User::getId);
-        Long id = userService.getUserWithAuthorities().map(User::getId).orElseThrow(InvalidPasswordException::new);
-        return dictionaryRepository.findAllByUserId(id);
+        return dictionaryService.findAllUserDictionaries();
     }
 
     /**
@@ -115,7 +103,7 @@ public class DictionaryResource {
     @Timed
     public List<Dictionary> getAllPublicDictionaries() {
         log.debug("REST request to get all public Dictionaries");
-        return dictionaryRepository.findAll();
+        return dictionaryService.findAllPublicDictionaries();
     }
 
     /**
@@ -128,7 +116,7 @@ public class DictionaryResource {
     @Secured(AuthoritiesConstants.ADMIN)
     public List<Dictionary> getAllDictionaries() {
         log.debug("REST request to get all Dictionaries");
-        return dictionaryRepository.findAll();
+        return dictionaryService.findAll();
     }
 
     /**
@@ -141,7 +129,7 @@ public class DictionaryResource {
     @Timed
     public ResponseEntity<Dictionary> getDictionary(@PathVariable Long id) {
         log.debug("REST request to get Dictionary : {}", id);
-        Optional<Dictionary> dictionary = dictionaryRepository.findById(id);
+        Optional<Dictionary> dictionary = dictionaryService.findOne(id);
         return ResponseUtil.wrapOrNotFound(dictionary);
     }
 
@@ -155,8 +143,7 @@ public class DictionaryResource {
     @Timed
     public ResponseEntity<Void> deleteDictionary(@PathVariable Long id) {
         log.debug("REST request to delete Dictionary : {}", id);
-
-        dictionaryRepository.deleteById(id);
+        dictionaryService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
@@ -175,29 +162,13 @@ public class DictionaryResource {
         if (multipartFile == null || multipartFile.isEmpty()) {
             throw new BadRequestAlertException("File is null", ENTITY_NAME, "");
         }
-        log.debug("param dic " + dictionaryId);
-        log.debug(convertToFile(multipartFile).getName());
-        try (Stream<String> lines = Files.lines(Paths.get(convertToFile(multipartFile).getPath()))) {
-            lines.forEach(System.out::println);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        Optional<Dictionary> dictionary = dictionaryRepository.findById(dictionaryId);
+        Optional<Dictionary> dictionary = dictionaryService.saveWordsFromFile(FileUtil.convertToFile(multipartFile), dictionaryId);
+
         Dictionary result = dictionary.orElseThrow(() -> new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull"));
         return ResponseEntity.created(new URI("/api/dictionaries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
-    }
-
-    private File convertToFile(MultipartFile file) {
-        File convFile = new File(file.getOriginalFilename());
-        try (FileOutputStream fos = new FileOutputStream(convFile)) {
-            fos.write(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return convFile;
     }
 
 }

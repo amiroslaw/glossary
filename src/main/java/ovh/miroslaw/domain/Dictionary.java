@@ -66,12 +66,12 @@ public class Dictionary implements Serializable {
         this.title = title;
     }
 
-    public Boolean isIsPublic() {
+    public Boolean getIsPrivate() {
         return isPrivate;
     }
 
-    public Dictionary isPublic(Boolean isPublic) {
-        this.isPrivate = isPublic;
+    public Dictionary isPrivate(Boolean isPrivate) {
+        this.isPrivate = isPrivate;
         return this;
     }
 
@@ -79,7 +79,7 @@ public class Dictionary implements Serializable {
         this.isPrivate = isPrivate;
     }
 
-    public User user() {
+    public User getUser() {
         return user;
     }
 
@@ -143,7 +143,7 @@ public class Dictionary implements Serializable {
         return "Dictionary{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
-            ", isPrivate='" + isIsPublic() + "'" +
+            ", isPrivate='" + getIsPrivate() + "'" +
             "}";
     }
 }
