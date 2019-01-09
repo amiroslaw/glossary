@@ -1,7 +1,9 @@
 package ovh.miroslaw.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.multipart.MultipartFile;
 import ovh.miroslaw.domain.Dictionary;
 import ovh.miroslaw.security.AuthoritiesConstants;

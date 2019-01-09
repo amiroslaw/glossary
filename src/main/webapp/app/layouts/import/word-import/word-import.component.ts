@@ -30,8 +30,17 @@ export class WordImportComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.importType);
+        // console.log(this.importType);
         // this.dictionaryService.update(new Dictionary(33, 'fdjisfd')).subscribe(
+        //     (res: HttpResponse<IDictionary>) => console.log(res.body.id),
+        //     (res: HttpErrorResponse) => console.log('update without id' + res.message)
+        // );
+        // this.dictionaryService.delete(44).subscribe(
+        //     (res: HttpResponse<IDictionary>) => console.log(res.body.id),
+        //     (res: HttpErrorResponse) => console.log('delete without id' + res.message)
+        // );
+        // console.log(this.importType);
+        // this.dictionaryService.create(new Dictionary(33, 'fdjisfd')).subscribe(
         //     (res: HttpResponse<IDictionary>) => console.log(res.body.id),
         //     (res: HttpErrorResponse) => console.log('update without id' + res.message)
         // );
